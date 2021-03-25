@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:moneyminded/helper/data.dart';
+import 'package:moneyminded/helper/news.dart';
+import 'package:moneyminded/models/article_model.dart';
 import 'package:moneyminded/models/category_model.dart';
 
 class Home extends StatefulWidget {
@@ -9,11 +11,26 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  // ignore: deprecated_member_use
   List<CategoryModel> categories = new List<CategoryModel>();
+  // ignore: deprecated_member_use
+  List<ArticleModel> articles = new List<ArticleModel>();
+  bool _loading = true;
   @override
   void initState() {
     super.initState();
     categories = getCategories();
+    getNews();
+  }
+
+  getNews() async {
+    News newsClass = new News();
+    await newsClass.getNews();
+    articles = newsClass.news;
+    print(articles);
+    setState(() {
+      _loading = false;
+    });
   }
 
   @override
@@ -39,26 +56,47 @@ class _HomeState extends State<Home> {
         ),
         elevation: 0,
       ),
-      body: Container(
-        child: Column(
-          children: <Widget>[
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              height: 70,
-              child: ListView.builder(
-                  itemCount: categories.length,
-                  shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) {
-                    return CategoryCard(
-                      imageUrl: categories[index].imageUrl,
-                      categoryName: categories[index].categoryName,
-                    );
-                  }),
+      body: _loading
+          ? Center(
+              child: Container(
+              child: CircularProgressIndicator(),
+            ))
+          : SingleChildScrollView(
+              child: Container(
+                child: Column(
+                  children: <Widget>[
+                    //category
+                    Container(
+                      padding: EdgeInsets.symmetric(horizontal: 16),
+                      height: 70,
+                      child: ListView.builder(
+                          itemCount: categories.length,
+                          shrinkWrap: true,
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) {
+                            return CategoryCard(
+                              imageUrl: categories[index].imageUrl,
+                              categoryName: categories[index].categoryName,
+                            );
+                          }),
+                    ),
+
+                    Container(
+                      child: ListView.builder(
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: articles.length,
+                          shrinkWrap: true,
+                          itemBuilder: (context, index) {
+                            return BlogTile(
+                                imageUrl: articles[index].urlToImage,
+                                title: articles[index].title,
+                                desc: articles[index].description);
+                          }),
+                    ),
+                  ],
+                ),
+              ),
             ),
-          ],
-        ),
-      ),
     );
   }
 }
@@ -106,18 +144,18 @@ class BlogTile extends StatelessWidget {
   final String title;
   final String desc;
 
-  BlogTile({@required this.imageUrl,@required this.title,@required this.desc});
+  BlogTile(
+      {@required this.imageUrl, @required this.title, @required this.desc});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      child:Column(
-        children: <Widget>[
-          Image.network(imageUrl),
-          Text(title),
-          Text(desc),
-        ],
-      )
-    );
+        child: Column(
+      children: <Widget>[
+        Image.network(imageUrl),
+        Text(title),
+        Text(desc),
+      ],
+    ));
   }
 }

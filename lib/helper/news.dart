@@ -4,11 +4,12 @@ import 'package:http/http.dart' as http;
 import 'package:moneyminded/models/article_model.dart';
 
 class News {
+  // ignore: deprecated_member_use
   List<ArticleModel> news = new List<ArticleModel>();
 
   Future<void> getNews() async {
     var url = Uri.parse(
-        "https://newsapi.org/v2/everything?q=tesla&from=2021-02-22&sortBy=publishedAt&apiKey=31646f377be84c1f860dc468710d36d0");
+        "https://newsapi.org/v2/top-headlines?country=in&category=business&apiKey=31646f377be84c1f860dc468710d36d0");
     var response = await http.get(url);
     var jsonData = jsonDecode(response.body);
 
