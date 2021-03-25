@@ -1,9 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:moneyminded/helper/data.dart';
 import 'package:moneyminded/helper/news.dart';
 import 'package:moneyminded/models/article_model.dart';
 import 'package:moneyminded/models/category_model.dart';
+import 'package:moneyminded/widgets/blogTile.dart';
+import 'package:moneyminded/widgets/categoryCard.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -82,15 +85,18 @@ class _HomeState extends State<Home> {
                     ),
 
                     Container(
+                      padding: EdgeInsets.only(top: 16),
                       child: ListView.builder(
-                          physics: NeverScrollableScrollPhysics(),
+                          physics: ClampingScrollPhysics(),
                           itemCount: articles.length,
                           shrinkWrap: true,
                           itemBuilder: (context, index) {
                             return BlogTile(
-                                imageUrl: articles[index].urlToImage,
-                                title: articles[index].title,
-                                desc: articles[index].description);
+                              imageUrl: articles[index].urlToImage,
+                              title: articles[index].title,
+                              desc: articles[index].description,
+                              url: articles[index].url,
+                            );
                           }),
                     ),
                   ],
@@ -98,64 +104,5 @@ class _HomeState extends State<Home> {
               ),
             ),
     );
-  }
-}
-
-class CategoryCard extends StatelessWidget {
-  final imageUrl, categoryName;
-  CategoryCard({this.imageUrl, this.categoryName});
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {},
-      child: Container(
-        margin: EdgeInsets.only(right: 15),
-        child: Stack(
-          alignment: AlignmentDirectional.center,
-          children: <Widget>[
-            ClipRRect(
-              borderRadius: BorderRadius.circular(8),
-              child: Image.network(
-                imageUrl,
-                width: 120,
-                height: 60,
-                fit: BoxFit.cover,
-              ),
-            ),
-            Container(
-              decoration: BoxDecoration(
-                  color: Colors.black26,
-                  borderRadius: BorderRadius.circular(8)),
-              child: Text(
-                categoryName,
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class BlogTile extends StatelessWidget {
-  final String imageUrl;
-  final String title;
-  final String desc;
-
-  BlogTile(
-      {@required this.imageUrl, @required this.title, @required this.desc});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-        child: Column(
-      children: <Widget>[
-        Image.network(imageUrl),
-        Text(title),
-        Text(desc),
-      ],
-    ));
   }
 }
