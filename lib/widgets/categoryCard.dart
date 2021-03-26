@@ -27,8 +27,8 @@ class CategoryCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(8),
               child: CachedNetworkImage(
                 imageUrl: imageUrl,
-                width: 120,
-                height: 60,
+                width: MediaQuery.of(context).size.width,
+                height: 90,
                 fit: BoxFit.cover,
               ),
             ),

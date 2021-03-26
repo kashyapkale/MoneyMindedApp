@@ -6,7 +6,6 @@ import 'package:moneyminded/helper/news.dart';
 import 'package:moneyminded/models/article_model.dart';
 import 'package:moneyminded/models/category_model.dart';
 import 'package:moneyminded/widgets/blogTile.dart';
-import 'package:moneyminded/widgets/categoryCard.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -44,13 +43,11 @@ class _HomeState extends State<Home> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              "Headlines",
-              textAlign: TextAlign.center,
+              'MoneyMinded',
               style: TextStyle(
-                fontFamily: "Times",
-                fontSize: 34,
-                fontWeight: FontWeight.w700,
-              ),
+                  fontFamily: 'Varela',
+                  fontSize: 32.0,
+                  fontWeight: FontWeight.bold),
             ),
           ],
         ),
@@ -83,7 +80,7 @@ class _HomeState extends State<Home> {
                 child: Column(
                   children: <Widget>[
                     //category
-                    Container(
+                    /*Container(
                       padding: EdgeInsets.symmetric(horizontal: 16),
                       height: 70,
                       child: ListView.builder(
@@ -97,7 +94,7 @@ class _HomeState extends State<Home> {
                             );
                           }),
                     ),
-
+*/
                     Container(
                       padding: EdgeInsets.only(top: 16),
                       child: ListView.builder(

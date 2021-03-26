@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:moneyminded/views/home.dart';
 import 'package:splashscreen/splashscreen.dart';
+
+import 'navScreen.dart';
 
 void main() => runApp(MyApp());
 
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
       ),
       home: SplashScreen(
         seconds: 5,
-        navigateAfterSeconds: new Home(),
+        navigateAfterSeconds: new Nav(),
         backgroundColor: Colors.black,
         title: new Text(
           '   MoneyMinded',
