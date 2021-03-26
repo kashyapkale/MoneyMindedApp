@@ -1,7 +1,6 @@
-import 'package:animated_splash_screen/animated_splash_screen.dart';
-import 'package:animated_text/animated_text.dart';
 import 'package:flutter/material.dart';
 import 'package:moneyminded/views/home.dart';
+import 'package:splashscreen/splashscreen.dart';
 
 void main() => runApp(MyApp());
 
@@ -14,9 +13,24 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.white,
       ),
-      home: AnimatedSplashScreen(
-        //splash: Image.asset('assets_image/1.jpg'),
-        splash: AnimatedText(
+      home: SplashScreen(
+        seconds: 5,
+        navigateAfterSeconds: new Home(),
+        backgroundColor: Colors.black,
+        title: new Text(
+          '   MoneyMinded',
+          textScaleFactor: 2,
+          style: TextStyle(color: Colors.white),
+        ),
+        image: new Image.asset('lib/assets_image/1.png'),
+        loadingText: Text(
+          "Welcome",
+          style: TextStyle(color: Colors.white),
+        ),
+        photoSize: 100.0,
+        loaderColor: Colors.blue,
+      ),
+      /*splash: AnimatedText(
           alignment: Alignment.center,
           speed: Duration(milliseconds: 1000),
           controller: AnimatedTextController.loop,
@@ -30,11 +44,7 @@ class MyApp extends StatelessWidget {
           onFinished: () {
             print("Animtion finished");
           },
-        ),
-        nextScreen: Home(),
-        backgroundColor: Colors.white,
-        duration: 30000,
-      ),
+        ),*/
     );
   }
 }

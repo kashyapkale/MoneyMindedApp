@@ -1,6 +1,7 @@
 import 'package:moneyminded/models/category_model.dart';
 
 List<CategoryModel> getCategories() {
+  // ignore: deprecated_member_use
   List<CategoryModel> category = new List<CategoryModel>();
 
   //Category1
