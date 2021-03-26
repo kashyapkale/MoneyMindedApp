@@ -76,6 +76,7 @@ class _CategoryNewsDisplayState extends State<CategoryNewsDisplay> {
                               title: articles[index].title,
                               desc: articles[index].description,
                               url: articles[index].url,
+                              content: articles[index].content,
                             );
                           }),
                     ),

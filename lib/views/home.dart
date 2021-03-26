@@ -42,11 +42,25 @@ class _HomeState extends State<Home> {
       appBar: AppBar(
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              "Headlines",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontFamily: "Times",
+                fontSize: 34,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+          ],
+        ),
+        /*title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
               "Money",
               style: TextStyle(
-                  color: Colors.yellow[900],
+                  color: Colors.black,
                   fontWeight: FontWeight.bold,
                   fontSize: 30),
             ),
@@ -56,7 +70,7 @@ class _HomeState extends State<Home> {
                     fontWeight: FontWeight.bold,
                     fontSize: 30)),
           ],
-        ),
+        ),*/
         elevation: 0,
       ),
       body: _loading
@@ -96,6 +110,7 @@ class _HomeState extends State<Home> {
                               title: articles[index].title,
                               desc: articles[index].description,
                               url: articles[index].url,
+                              content: articles[index].content,
                             );
                           }),
                     ),
