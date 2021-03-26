@@ -1,15 +1,23 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:moneyminded/views/category_news.dart';
 
 class CategoryCard extends StatelessWidget {
-  final imageUrl, categoryName;
+  final String imageUrl, categoryName;
   CategoryCard({this.imageUrl, this.categoryName});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => CategoryNewsDisplay(
+                      category: categoryName.toLowerCase(),
+                    )));
+      },
       child: Container(
         margin: EdgeInsets.only(right: 15),
         child: Stack(
